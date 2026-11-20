@@ -1,0 +1,3 @@
+scikit-learn
+anthropic
+sentence-transformers   # only for embedding_rag.py
