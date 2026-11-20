@@ -1,15 +1,22 @@
-# Free analyses (no LLM calls)
+# Comparison of memory architectures (free checks, no LLM calls)
 
-## Experiment 1: retrieval size sweep
+## 1. Needed memories that reached the prompt
 
-Needed memories that made it into the prompt (all 3 scenes, 15 turns).
+| Scene | a_log | b_rag_tfidf | c_temporal_graph |
+|---|---|---|---|
+| bedtime_hospital_week | 9/9 | 6/9 | 8/9 |
+| conversation_back_from_seoul | 5/5 | 3/5 | 5/5 |
+| conversation_work_talk | 4/4 | 3/4 | 4/4 |
+| **Total** | **18/18** | **12/18** | **17/18** |
+
+## 2. Retrieval size sweep
 
 | Setting | 3 | 6 (default) | 10 |
 |---|---|---|---|
-| b_rag TOP_K | 10/18 | 12/18 | 12/18 |
-| c_temporal_graph RECENT_N | 15/18 | 17/18 | 18/18 |
+| RAG (TF-IDF) TOP_K | 10/18 | 12/18 | 12/18 |
+| Temporal graph RECENT_N | 15/18 | 17/18 | 18/18 |
 
-## Experiment 2: where needed memories sit in the log prompt (a_log)
+## 3. Where needed memories sit in the log prompt (a_log)
 
 0% = first line of the memory block, 100% = last line.
 
@@ -35,11 +42,11 @@ Needed memories that made it into the prompt (all 3 scenes, 15 turns).
 
 Totals: start 1, middle 4, end 12
 
-## Experiment 3: memory block size per architecture
+## 4. Memory block size per architecture
 
 | Architecture | Avg characters | ~Tokens (chars / 4) |
 |---|---|---|
 | a_log | 1754 | 438 |
-| b_rag | 397 | 99 |
+| b_rag_tfidf | 397 | 99 |
 | c_temporal_graph | 781 | 195 |
 
